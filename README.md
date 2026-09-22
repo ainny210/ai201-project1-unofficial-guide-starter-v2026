@@ -21,11 +21,7 @@
 
 ## What This Does
 
-<!-- Three or four sentences. Which corpus you picked, and the kinds of
-     questions your system answers. Write it for someone who has never seen
-     this repo.
-
-     Milestone 5. -->
+I used the campus_life corpus, which contains short posts about student life on campus. My system answers specific questions about housing, dining, courses, transportation, study spaces, and other campus information. It retrieves the most relevant documents and uses them to generate an answer with the source included. If a question is not covered by the corpus, the relevance cutoff allows the system to refuse instead of answering from unrelated information.
 
 ## Chunking Strategy
 
@@ -140,18 +136,10 @@ Source: `housing_morrow_house.txt`
 
 ## How I Used AI
 
-<!-- Two specific moments. For each: what you asked for, what came back, and
-     what you changed about it.
 
-     "I asked Claude to write the chunking function from my notes. It ignored
-     the overlap, so I added that myself" is the level of detail we're after.
-     "I used AI to help me code" is not.
+**1.** I asked ChatGPT to help me understand how to implement the chunking strategy for my campus_life corpus. It suggested keeping each short document as one complete chunk. I reviewed the corpus and the chunk statistics, then used one document per chunk with no overlap because the documents were already short and focused.
 
-     Milestone 5. -->
-
-**1.**
-
-**2.**
+**2.** I asked ChatGPT to help me understand how to choose the relevance cutoff. It explained that I should compare the retrieval distances of questions covered by my corpus with questions outside the corpus. I ran all ten questions myself and recorded the actual distances. The in-corpus distances were 0.300–0.448 and the out-of-scope distances were 0.825–0.934, so I kept the cutoff at 0.6.
 
 <!-- ── Stretch features ─────────────────────────────────────────────────────
      Doing one? Say so here BEFORE you start. A feature this README never
