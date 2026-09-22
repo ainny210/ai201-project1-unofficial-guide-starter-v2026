@@ -105,14 +105,15 @@ Laundry costs $1.75 wash, $1.75 dry, app-based. On noise: moderate; the building
 <!-- One complete question and answer, pasted as text, with the source line
      visible. Milestone 4. -->
 
-**Question:**
+**Question:** What problem is reported on the ground floor of Morrow House?
 
 **Answer:**
 
-```
-```
+A known damp problem is reported on the ground floor of Morrow House, which resulted in two rooms being taken offline in 2024.
 
-**My relevance cutoff:**
+Source: `housing_morrow_house.txt`
+
+**My relevance cutoff:** 0.6
 
 <!-- The number you set in config.py, and how you got there.
 
@@ -122,10 +123,20 @@ Laundry costs $1.75 wash, $1.75 dry, app-based. On noise: moderate; the building
      here — the table below wants all ten rows.
 
      Milestone 4. -->
+     I tested five questions that the campus_life corpus should answer and five questions that are outside the corpus. The in-corpus questions had best distances from 0.300 to 0.448. The out-of-scope questions had best distances from 0.825 to 0.934. There was a clear gap between the two groups, so I kept the relevance cutoff at 0.6.
 
 | Question | In corpus? | Best distance |
 |---|---|---|
-|  |  |  |
+| What problem is reported on the ground floor of Morrow House? | Yes | 0.384 |
+| How often does the campus shuttle run on weekdays? | Yes | 0.425 |
+| What heating problem do students report at Old Brewhouse? | Yes | 0.428 |
+| Until what time is the library open during term? | Yes | 0.448 |
+| What payment method is required for laundry at Old Brewhouse? | Yes | 0.300 |
+| What is the capital of Mongolia? | No | 0.825 |
+| How do I change the oil in a diesel engine? | No | 0.934 |
+| Who won the 1994 World Cup? | No | 0.886 |
+| What is the recommended dosage of ibuprofen for a headache? | No | 0.844 |
+| How do I write a for loop in Rust? | No | 0.896 |
 
 ## How I Used AI
 
