@@ -168,15 +168,77 @@ Source: `housing_morrow_house.txt`
 
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
 |---|---|---|---|---|---|
-| 1. Retrieved chunk contains the answer | 4 of 5 |  |  |  |  |
-| 2. Every answer names a source | 5 of 5 |  |  |  |  |
-| 3. Gate stops out-of-corpus questions | 4 of 5 |  |  |  |  |
-| 4. | | | | | |
-| 5. | | | | | |
-
+| 1. Retrieved chunk contains the answer | 4 of 5 | 5 of 5 | 5 of 5 | 5 of 5 | MET |
+| 2. Every answer names a source | 5 of 5 | 5 of 5 | 5 of 5 | 5 of 5 | MET |
+| 3. Gate stops out-of-corpus questions | 4 of 5 | 5 of 5 | 5 of 5 | 5 of 5 | MET |
+| 4. Sampled chunks contain a complete thought | 4 of 5 | 5 of 5 | 5 of 5 | 5 of 5 | MET |
+| 5. Answer names a source relevant to the answer | 4 of 5 | 5 of 5 | 5 of 5 | 5 of 5 | MET |
 <!-- Underneath, paste the REAL output for each criterion from one of your
      runs — the actual text your system produced, not a description of it.
      Name the file and function that produced it. -->
+### Criterion 1 Evidence
+
+Produced by: `run_eval.py::main` using `store.py::search`
+
+Question: What problem is reported on the ground floor of Morrow House?
+
+Morrow House has a known damp problem on the ground floor, which resulted in two rooms being taken offline in 2024.
+
+Source: `housing_morrow_house.txt`
+
+
+### Criterion 2 Evidence
+
+Produced by: `run_eval.py::main`
+
+Question: How often does the campus shuttle run on weekdays?
+
+On weekdays, the campus shuttle runs a loop every 20 minutes (from 7am to 11pm).
+
+Source: `transit_shuttle.txt`
+
+
+### Criterion 3 Evidence
+
+Produced by: `run_eval.py::check_out_of_scope`
+
+Relevance cutoff: `0.6`
+
+Out-of-scope questions refused: **5 of 5**
+
+- What is the capital of Mongolia? — distance `0.825` — refused
+- How do I change the oil in a diesel engine? — distance `0.934` — refused
+- Who won the 1994 World Cup? — distance `0.886` — refused
+- What is the recommended dosage of ibuprofen for a headache? — distance `0.844` — refused
+- How do I write a for loop in Rust? — distance `0.896` — refused
+
+
+### Criterion 4 Evidence
+
+Produced by: `chunker.py::split_documents`
+
+Five sampled chunks were inspected. All 5 of 5 contained complete thoughts that could be understood without reading another chunk.
+
+The sampled chunks came from:
+
+- `admin_add_drop_deadline.txt#0`
+- `course_biol_160.txt#0`
+- `course_hist_118_workload.txt#0`
+- `dining_pellew_dining_hall_followup.txt#0`
+- `housing_innisfree_hall.txt#0`
+
+
+### Criterion 5 Evidence
+
+Produced by: `run_eval.py::main`
+
+All 5 of 5 test questions produced answers that named a source document containing information relevant to the answer.
+
+- Morrow House damp problem → `housing_morrow_house.txt`
+- Campus shuttle frequency → `transit_shuttle.txt`
+- Old Brewhouse heating problem → `housing_old_brewhouse.txt`
+- Library closing time → `study_library_hours.txt`
+- Old Brewhouse laundry payment → `housing_old_brewhouse_laundry.txt` and `housing_old_brewhouse.txt`
 
 ## Verdicts
 
@@ -188,14 +250,15 @@ Source: `housing_morrow_house.txt`
      The target has to hold, not show up occasionally.
 
      Milestone 2. -->
+     
 
 | # | Criterion | Verdict | How I decided |
 |---|---|---|---|
-| 1 |  |  |  |
-| 2 |  |  |  |
-| 3 |  |  |  |
-| 4 |  |  |  |
-| 5 |  |  |  |
+| 1 | Retrieved chunks contain the answer | MET | All 5 of 5 test questions retrieved a chunk containing the answer in all three runs, exceeding my target of 4 of 5. |
+| 2 | Every answer names a source | MET | All 5 of 5 answers named at least one source in all three runs, meeting my target of 5 of 5. |
+| 3 | Relevance gate stops out-of-corpus questions | MET | The relevance gate refused all 5 of 5 out-of-corpus questions, exceeding my target of 4 of 5. |
+| 4 | Sampled chunks contain a complete thought | MET | All 5 of 5 sampled chunks contained a complete thought that could be understood on its own, exceeding my target of 4 of 5. |
+| 5 | Answer names a relevant source | MET | All 5 of 5 answers named a source document that contained information relevant to the answer, exceeding my target of 4 of 5. |
 
 ## Diagnoses
 
@@ -216,15 +279,19 @@ Source: `housing_morrow_house.txt`
      low, and which one you'd tighten and to what.
 
      Milestone 3. -->
+     I did not miss any of my five acceptance criteria. All five criteria met their targets in the before evaluation.
+
+Some of my targets were slightly lenient because Criteria 1, 3, 4, and 5 required only 4 out of 5, but the system achieved 5 out of 5. I would tighten Criterion 5 from 4 out of 5 to 5 out of 5 because a source should not only be present, but should support the answer every time.
 
 ## The Improvement
 
 **What I changed:**
-
+I changed TOP_K from 5 to 3 so the system retrieves fewer chunks for each question.
 **Why I picked it:**
 
 <!-- Connect it to a specific diagnosis above in one sentence. If you can't,
      you picked a fix because it sounded impressive. -->
+     My before evaluation already met all five criteria, but I noticed that the system retrieved more documents than necessary. I reduced TOP_K to 3 to make retrieval more focused while checking whether the system could still answer correctly and provide relevant sources.
 
 ### Run Log — After
 
@@ -233,11 +300,11 @@ Source: `housing_morrow_house.txt`
 
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
 |---|---|---|---|---|---|
-| 1. Retrieved chunk contains the answer | 4 of 5 |  |  |  |  |
-| 2. Every answer names a source | 5 of 5 |  |  |  |  |
-| 3. Gate stops out-of-corpus questions | 4 of 5 |  |  |  |  |
-| 4. | | | | | |
-| 5. | | | | | |
+| 1. Retrieved chunk contains the answer | 4 of 5 | 5 of 5 | 5 of 5 | 5 of 5 | MET |
+| 2. Every answer names a source | 5 of 5 | 5 of 5 | 5 of 5 | 5 of 5 | MET |
+| 3. Gate stops out-of-corpus questions | 4 of 5 | 5 of 5 | 5 of 5 | 5 of 5 | MET |
+| 4. Sampled chunks contain a complete thought | 4 of 5 | 5 of 5 | 5 of 5 | 5 of 5 | MET |
+| 5. Answer names a source relevant to the answer | 4 of 5 | 5 of 5 | 5 of 5 | 5 of 5 | MET |
 
 **Did it help?**
 
@@ -247,6 +314,7 @@ Source: `housing_morrow_house.txt`
      tell.
 
      Milestone 4. -->
+     Yes. After reducing TOP_K from 5 to 3, all five test questions still met the acceptance criteria, and the relevance gate still refused 5 out of 5 out-of-scope questions. The system retrieved fewer chunks without reducing the measured performance.
 
 ## What's Still Broken
 
@@ -257,6 +325,7 @@ Source: `housing_morrow_house.txt`
      not.
 
      Milestone 5. -->
+     None of my five acceptance criteria were still missed after the change. All five criteria continued to meet their targets after reducing TOP_K from 5 to 3.
 
 ## What I'd Do Differently
 
@@ -264,3 +333,4 @@ Source: `housing_morrow_house.txt`
      differently, and why?
 
      Milestone 5. -->
+     I would make Criterion 5 stricter by requiring 5 out of 5 answers to name a source that is relevant to the answer instead of 4 out of 5. Since source relevance is important for grounded answers, I would expect it to be correct every time.
