@@ -23,8 +23,7 @@ For at least 4 of my 5 test questions, the retrieved chunks include one that
 contains the answer.
 
 **Why this target:**
-<!-- e.g. "One of my questions is about a topic only two documents mention, so
-     I expect that one to be hard." -->
+ I chose 4 out of 5 because my campus_life documents are short and focused on specific topics, so I expect most questions to retrieve a chunk containing the answer, while allowing one question to be harder to retrieve.
 
 ---
 
@@ -33,8 +32,7 @@ contains the answer.
 Every answer the system produces names at least one source document.
 
 **Why this target:**
-<!-- Why all five and not four? What about your setup makes that achievable —
-     or what would have to go wrong for it not to be? -->
+I chose every answer because the system is designed to give grounded answers from the campus_life documents. A source should always be named so the user can see where the information came from.
 
 ---
 
@@ -50,8 +48,7 @@ in at least 4 of 5 tries.
      just keep five of them, or the "4 of 5" above has nothing to be 4 of. -->
 
 **Why this target:**
-<!-- What did your distances look like when you set the cutoff in Milestone 4?
-     Was there a clean gap, or did the two groups overlap? -->
+I chose 4 out of 5 because the relevance gate should reject questions that are clearly unrelated to campus_life, while allowing for one case where an unrelated question may still retrieve a similar chunk.
 
 ---
 
@@ -69,12 +66,12 @@ in at least 4 of 5 tries.
        - "No chunk is shorter than 200 characters, since anything below that
           in my corpus turned out to be a heading with no content under it." -->
 
-
+At least 4 of 5 sampled chunks should contain a complete thought that can be understood without reading another chunk.
 
 **Why this target:**
 
 
-
+I chose 4 out of 5 because the campus_life documents I reviewed are short and focused on specific topics. Most chunks should contain enough information to make sense on their own, while allowing one chunk to be less complete.
 ---
 
 ## 5. Your choice
@@ -87,12 +84,12 @@ in at least 4 of 5 tries.
      present — anything, as long as it names a number or an observable
      outcome. -->
 
-
+For at least 4 of my 5 test questions, the answer should name a source document that actually contains information relevant to the answer.
 
 **Why this target:**
 
 
-
+I chose 4 out of 5 because naming a source is only useful if the source actually supports the answer. I expect most answers to cite the correct campus_life document, while allowing one question where retrieval may include a less relevant source.
 ---
 
 <!-- ─────────────────────────────────────────────────────────────────────────
