@@ -140,6 +140,9 @@ Source: `housing_morrow_house.txt`
 **1.** I asked ChatGPT to help me understand how to implement the chunking strategy for my campus_life corpus. It suggested keeping each short document as one complete chunk. I reviewed the corpus and the chunk statistics, then used one document per chunk with no overlap because the documents were already short and focused.
 
 **2.** I asked ChatGPT to help me understand how to choose the relevance cutoff. It explained that I should compare the retrieval distances of questions covered by my corpus with questions outside the corpus. I ran all ten questions myself and recorded the actual distances. The in-corpus distances were 0.300–0.448 and the out-of-scope distances were 0.825–0.934, so I kept the cutoff at 0.6.
+**3.** I used ChatGPT to help me understand the Unit 2 evaluation process and interpret my before-run results. I reviewed the actual run output myself and confirmed that all five acceptance criteria were met.
+
+**4.** I used ChatGPT to discuss a small improvement after the initial evaluation. I changed TOP_K from 5 to 3, ran the evaluation again, and compared the results. The system continued to meet all five criteria while retrieving fewer chunks per question.
 
 <!-- ── Stretch features ─────────────────────────────────────────────────────
      Doing one? Say so here BEFORE you start. A feature this README never
